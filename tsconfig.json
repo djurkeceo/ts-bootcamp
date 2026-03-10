@@ -43,7 +43,9 @@
   },
 
   "include": [
-    "1.TheBuildingBlocks/**/*"
+    "1.TheBuildingBlocks/**/*",
+    "2.InterfacesAndTypeAliases/**/*"
   ],
+  
   "exclude": ["node_modules"]
 }
