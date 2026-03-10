@@ -54,10 +54,12 @@ var kreirajPost = function (naslov, sadrzaj, autor) {
         statusObjave: exports.BlogPostDefault.statusObjave
     };
 };
-console.log(kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', { ime: 'djurke', email: 'djurke@me.com' }));
+var kreiranPost = kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', { ime: 'djurke', email: 'djurke@me.com' });
+// console.log(kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', {ime: 'djurke', email: 'djurke@me.com'}));
+console.log(kreiranPost);
 var objaviPost = function (post) {
     return __assign(__assign({}, post), { statusObjave: 'published' });
 };
-console.log(objaviPost(kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', { ime: 'djurke', email: 'djurke@me.com' })));
+console.log(objaviPost(kreiranPost));
 // const prikaziSumiranjePostova = (postovi: BlogPost[]): BlogPost[] => {
 // }

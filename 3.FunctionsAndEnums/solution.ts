@@ -66,7 +66,9 @@ const kreirajPost = (naslov: string, sadrzaj: string, autor: Autor): BlogPostWit
     }
 }
 
-console.log(kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', {ime: 'djurke', email: 'djurke@me.com'}));
+const kreiranPost = kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', {ime: 'djurke', email: 'djurke@me.com'})
+// console.log(kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', {ime: 'djurke', email: 'djurke@me.com'}));
+console.log(kreiranPost)
 
 const objaviPost = (post: BlogPost): BlogPost => {
     return {
@@ -75,11 +77,7 @@ const objaviPost = (post: BlogPost): BlogPost => {
     }
 }
 
-console.log(objaviPost(
-    kreirajPost(
-        'Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', {ime: 'djurke', email: 'djurke@me.com'}
-    )
-))
+console.log(objaviPost(kreiranPost))
 
 // const prikaziSumiranjePostova = (postovi: BlogPost[]): BlogPost[] => {
 // }
