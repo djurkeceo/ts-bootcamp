@@ -1,0 +1,16 @@
+Napiši sledeće u novom fajlu vjezba1.ts — bez pokretanja, samo razmišljaj o tipovima:
+Zadatak: Modeluj podatke za jednostavan blog post sistem.
+
+Napravi varijable koje opisuju jedan blog post:
+
+naslov (tekst)
+broj pregleda (broj)
+objavljen (da/ne)
+tagovi (lista tekstova)
+ocena (može biti broj ili null ako još nije ocenjen)
+
+
+Napravi varijablu status koja može biti samo jedna od ove tri vrednosti: "draft", "published", "archived"
+Napravi tuple koji predstavlja RGB boju (tri broja od 0-255)
+
+Bonus izazov: Šta misliš, zašto je let ocena: number | null bolje rešenje nego samo let ocena: number = 0? Razmisli o tome iz perspektive značenja podatka.
