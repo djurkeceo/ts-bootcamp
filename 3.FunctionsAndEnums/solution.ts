@@ -51,7 +51,7 @@ export const BlogPostDefault: BlogPost = {
 }
 
 interface BlogPostWithID extends BlogPost {
-    readonly id: string | number;
+    readonly id: string | number
 }
 
 const kreirajPost = (naslov: string, sadrzaj: string, autor: Autor): BlogPostWithID => {
@@ -67,8 +67,8 @@ const kreirajPost = (naslov: string, sadrzaj: string, autor: Autor): BlogPostWit
 }
 
 const kreiranPost = kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', {ime: 'djurke', email: 'djurke@me.com'})
-// console.log(kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', {ime: 'djurke', email: 'djurke@me.com'}));
 console.log(kreiranPost)
+console.log()
 
 const objaviPost = (post: BlogPost): BlogPost => {
     return {
@@ -78,6 +78,18 @@ const objaviPost = (post: BlogPost): BlogPost => {
 }
 
 console.log(objaviPost(kreiranPost))
+console.log()
 
-// const prikaziSumiranjePostova = (postovi: BlogPost[]): BlogPost[] => {
-// }
+const prikaziSumiranjePostova = (postovi: BlogPostWithID[]) => {
+    let brojPostova = postovi.length
+    let sumaOcena = postovi.reduce((suma, post) => { return suma + (post.ocena ?? 0) }, 0)
+    let prosecnaOcena = sumaOcena / brojPostova
+
+    if(brojPostova === 0) console.log('Nema postova za prikazati.')
+
+    else console.log(`Niz blogova: ${JSON.stringify(postovi[0], null, 2)}
+                    , broj postova: ${brojPostova}
+                    , prosecna ocena: ${prosecnaOcena}`)
+}
+
+prikaziSumiranjePostova([kreiranPost])
