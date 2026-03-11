@@ -35,10 +35,10 @@ const kreirajImeAutora = (ime: string, email: string, bio?: string): Autor => {
     }
 }
 
-console.log(kreirajImeAutora('Djurke', 'djurke@me.com', ''))
-console.log()
+console.log(kreirajImeAutora('Djurke', 'djurke@me.com'))
+console.log('---')
 
-export const BlogPostDefault: BlogPost = {
+export const BLOG_POST_DEFAULT: BlogPost = {
     naslov: '',
     sadrzaj: '',
     brojPregleda: 0,
@@ -59,16 +59,16 @@ const kreirajPost = (naslov: string, sadrzaj: string, autor: Autor): BlogPostWit
         id: Math.floor(Math.random() * 1000),
         naslov,
         sadrzaj,
-        brojPregleda: BlogPostDefault.brojPregleda,
-        ocena: BlogPostDefault.ocena,
+        brojPregleda: BLOG_POST_DEFAULT.brojPregleda,
+        ocena: BLOG_POST_DEFAULT.ocena,
         autor,
-        statusObjave: BlogPostDefault.statusObjave
+        statusObjave: BLOG_POST_DEFAULT.statusObjave
     }
 }
 
 const kreiranPost = kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Suboticke ulice su...', {ime: 'djurke', email: 'djurke@me.com'})
 console.log(kreiranPost)
-console.log()
+console.log('---')
 
 const objaviPost = (post: BlogPost): BlogPost => {
     return {
@@ -78,13 +78,20 @@ const objaviPost = (post: BlogPost): BlogPost => {
 }
 
 console.log(objaviPost(kreiranPost))
-console.log()
+console.log('---')
 
 const prikaziSumiranjePostova = (postovi: BlogPostWithID[]) => {
-    let brojPostova = postovi.length
-    let sumaOcena = postovi.reduce((suma, post) => { return suma + (post.ocena ?? 0) }, 0)
-    let prosecnaOcena = sumaOcena / brojPostova
+    let brojPostova = postovi.filter(p => { p.statusObjave === 'published' }).length
 
+    const ocenjeniPostovi = postovi.filter((post): post is BlogPostWithID & { ocena: number } => 
+    post.ocena !== null
+    )
+
+    const prosecnaOcena = ocenjeniPostovi.length > 0
+        ? ocenjeniPostovi.reduce((suma, post) => suma + post.ocena, 0) / ocenjeniPostovi.length
+        : 0
+
+        
     if(brojPostova === 0) console.log('Nema postova za prikazati.')
 
     else console.log(`Niz blogova: ${JSON.stringify(postovi[0], null, 2)}
