@@ -38,17 +38,11 @@ const kreirajImeAutora = (ime: string, email: string, bio?: string): Autor => {
 console.log(kreirajImeAutora('Djurke', 'djurke@me.com'))
 console.log('---')
 
-export const BLOG_POST_DEFAULT: BlogPost = {
-    naslov: '',
-    sadrzaj: '',
+const BLOG_POST_DEFAULTS = {
     brojPregleda: 0,
     ocena: null,
-    autor: {
-        ime: '',
-        email: ''
-    },
-    statusObjave: 'draft'
-}
+    statusObjave: "draft"
+} as const;
 
 interface BlogPostWithID extends BlogPost {
     readonly id: string | number
@@ -59,10 +53,10 @@ const kreirajPost = (naslov: string, sadrzaj: string, autor: Autor): BlogPostWit
         id: Math.floor(Math.random() * 1000),
         naslov,
         sadrzaj,
-        brojPregleda: BLOG_POST_DEFAULT.brojPregleda,
-        ocena: BLOG_POST_DEFAULT.ocena,
+        brojPregleda: BLOG_POST_DEFAULTS.brojPregleda,
+        ocena: BLOG_POST_DEFAULTS.ocena,
         autor,
-        statusObjave: BLOG_POST_DEFAULT.statusObjave
+        statusObjave: BLOG_POST_DEFAULTS.statusObjave
     }
 }
 
