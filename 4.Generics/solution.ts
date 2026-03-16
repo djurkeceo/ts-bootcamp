@@ -1,23 +1,25 @@
-# 🏠 Domaći Zadatak #4
+interface Autor {
+    ime: string;
+    email: string;
+    bio?: string;
+}
 
-Napiši sledeće funkcije koristeći `BlogPost` i `Autor` interfejse iz prethodnog zadatka:
+interface BlogPost {
+    naslov: string;
+    sadrzaj: string;
+    brojPregleda: number;
+    ocena: number | null;
+    autor: Autor;
+    statusObjave: StatusObjave;
+}
 
+type StatusObjave = "draft" | "published" | "archived";
 
-1. Napiši generic funkciju `poslednji<T>` koja vraća poslednji element niza
-   Ako je niz prazan, vraća null — tip povratne vrednosti mora to reflektovati
+function poslednji<T> (elniza: T[]): T | null {
+    if (elniza.length === 0) return null;
+    return elniza[elniza.length - 1];
+} 
 
-2. Napiši generic funkciju `ukloniDuplikate<T>` koja prima niz i vraća 
-   novi niz bez duplikata (istraži kako Set funkcioniše u JS-u)
+console.log(poslednji([1, 2, 3, 4]));
+console.log(poslednji([]))
 
-3. Napiši generic interface `ApiOdgovor<T>` koji modeluje standardni 
-   API response objekat:
-   - success: boolean
-   - data: T (ovo je generic deo — data može biti bilo šta)
-   - error?: string
-
-   Zatim napravi dve konkretne upotrebe:
-   - ApiOdgovor<BlogPostWithID>  — odgovor koji sadrži jedan post
-   - ApiOdgovor<BlogPostWithID[]> — odgovor koji sadrži listu postova
-
-BONUS: Napiši funkciju `kreirajOdgovor<T>(data: T): ApiOdgovor<T>`
-       koja prima podatke i vraća uspešan API response objekat
