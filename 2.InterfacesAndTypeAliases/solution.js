@@ -1,4 +1,6 @@
-var mojPost = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const mojPost = {
     naslov: "Suboticke ulice",
     sadrzaj: "ovo su suboticke ulice",
     brojPregleda: 15000,
@@ -10,3 +12,4 @@ var mojPost = {
     statusObjave: "published"
 };
 console.log(mojPost);
+//# sourceMappingURL=solution.js.map

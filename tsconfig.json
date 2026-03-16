@@ -8,10 +8,9 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
-    "target": "esnext",
-    "types": [],
+    "target": "es2015",
     // For nodejs:
-    // "lib": ["esnext"],
+    "lib": ["ES2015", "DOM", "ESNext"],
     // "types": ["node"],
     // and npm install -D @types/node
 
@@ -22,7 +21,7 @@
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    // "exactOptionalPropertyTypes": true,
 
     // Style Options
     // "noImplicitReturns": true,
@@ -44,7 +43,9 @@
 
   "include": [
     "1.TheBuildingBlocks/**/*",
-    "2.InterfacesAndTypeAliases/**/*"
+    "2.InterfacesAndTypeAliases/**/*",
+    "3.FunctionsAndEnums/**/*",
+    "4.Generics/**/*"
   ],
   
   "exclude": ["node_modules"]
