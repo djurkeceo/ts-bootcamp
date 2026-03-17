@@ -110,7 +110,9 @@ else console.log(odgovorNaBlog)
 console.log('---')
 
 console.log(odgovorNaBlogNiz)
+
 console.log('---')
+
 const odgovor = await proveriOdgovor()
 console.log(odgovor)
 console.log('Server je pokrenut, blogovi su vidljivi')
