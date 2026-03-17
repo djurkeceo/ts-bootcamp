@@ -13,11 +13,11 @@ interface BlogPost {
     statusObjave: StatusObjave;
 }
 
-type StatusObjave = "draft" | "published" | "archived";
+type StatusObjave = "draft" | "published" | "archived"
 
 function poslednji<T> (elniza: T[]): T | null {
-    if (elniza.length === 0) return null;
-    return elniza[elniza.length - 1] ?? null;
+    if (elniza.length === 0) return null
+    return elniza[elniza.length - 1] ?? null
 } 
 
 console.log(poslednji([1, 2, 3, 4]))
