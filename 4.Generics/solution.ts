@@ -14,7 +14,7 @@ interface BlogPost {
 }
 
 interface BlogPostWithID extends BlogPost {
-    ID: number;
+    id: number;
 }
 
 type StatusObjave = "draft" | "published" | "archived"
@@ -42,7 +42,7 @@ interface ApiOdgovor<T> {
 const odgovorNaBlog: ApiOdgovor<BlogPostWithID> = {
     success: true,
     data: {
-        ID: Math.floor(Math.random() * 100),
+        id: Math.floor(Math.random() * 100),
         naslov: 'Suboticke ulice',
         sadrzaj: 'Suboticke ulice su prelepe...',
         brojPregleda: 15000,
@@ -59,7 +59,7 @@ const odgovorNaBlog: ApiOdgovor<BlogPostWithID> = {
 const odgovorNaBlogNiz: ApiOdgovor<BlogPostWithID[]> = {
     success: false,
     data: [{
-        ID: Math.floor(Math.random() * 100),
+        id: Math.floor(Math.random() * 100),
         naslov: 'Suboticke ulice 1',
         sadrzaj: 'Suboticke ulice 1 su prelepe...',
         brojPregleda: 1400,
@@ -71,7 +71,7 @@ const odgovorNaBlogNiz: ApiOdgovor<BlogPostWithID[]> = {
         statusObjave: 'published'
     },
     {
-        ID: Math.floor(Math.random() * 100),
+        id: Math.floor(Math.random() * 100),
         naslov: 'Suboticke ulice 2',
         sadrzaj: 'Suboticke ulice 2 su prelepe...',
         brojPregleda: 2500,
