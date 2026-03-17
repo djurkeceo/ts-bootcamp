@@ -108,6 +108,7 @@ else if (odgovorNaBlog.statusCode === '404') console.log(`
 else console.log(odgovorNaBlog)
 
 console.log('---')
+
 console.log(odgovorNaBlogNiz)
 console.log('---')
 const odgovor = await proveriOdgovor()

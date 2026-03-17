@@ -63,11 +63,19 @@ async function proveriOdgovor() {
     };
 }
 console.log('---');
-console.log(odgovorNaBlog);
+if (odgovorNaBlog.statusCode === '500')
+    console.log(`
+    Nije moguce pristupiti blogovima, (error code: ${odgovorNaBlog.statusCode})`);
+else if (odgovorNaBlog.statusCode === '404')
+    console.log(`
+    Nije moguce pristupiti blogovima, (error code: ${odgovorNaBlog.statusCode})`);
+else
+    console.log(odgovorNaBlog);
 console.log('---');
 console.log(odgovorNaBlogNiz);
 console.log('---');
 const odgovor = await proveriOdgovor();
 console.log(odgovor);
+console.log('Server je pokrenut, blogovi su vidljivi');
 export {};
 //# sourceMappingURL=solution.js.map
