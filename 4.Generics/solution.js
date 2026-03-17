@@ -1,8 +1,7 @@
 function poslednji(elniza) {
-    var _a;
     if (elniza.length === 0)
         return null;
-    return (_a = elniza[elniza.length - 1]) !== null && _a !== void 0 ? _a : null;
+    return elniza[elniza.length - 1] ?? null;
 }
 console.log(poslednji([1, 2, 3, 4]));
 console.log(poslednji([]));
@@ -10,7 +9,7 @@ function ukloniDuplikate(niz) {
     return Array.from(new Set(niz));
 }
 console.log(ukloniDuplikate([1, 2, 1, 5, 6, 2, 2, 4, 1, 3, 5, 7, 9]));
-var odgovorNaBlog = {
+const odgovorNaBlog = {
     success: true,
     data: {
         ID: Math.floor(Math.random() * 100),
@@ -24,10 +23,10 @@ var odgovorNaBlog = {
         },
         statusObjave: 'draft'
     },
-    error: '500'
+    statusCode: '500'
 };
-var odgovorNaBlogNiz = {
-    success: true,
+const odgovorNaBlogNiz = {
+    success: false,
     data: [{
             ID: Math.floor(Math.random() * 100),
             naslov: 'Suboticke ulice 1',
@@ -52,10 +51,23 @@ var odgovorNaBlogNiz = {
             },
             statusObjave: 'archived'
         }],
-    error: '500'
+    statusCode: '500'
 };
-// function kreitajOdgovor<T>(data: T): ApiOdgovor<T> {
-//     return 
-// }
+const spavaj = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+async function proveriOdgovor() {
+    await spavaj(2000);
+    return {
+        ...odgovorNaBlogNiz,
+        success: true,
+        statusCode: '200',
+    };
+}
+console.log('---');
 console.log(odgovorNaBlog);
-console.log(odgovorNaBlogNiz.data[0]);
+console.log('---');
+console.log(odgovorNaBlogNiz);
+console.log('---');
+const odgovor = await proveriOdgovor();
+console.log(odgovor);
+export {};
+//# sourceMappingURL=solution.js.map

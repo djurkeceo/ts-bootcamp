@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const mojPost = {
     naslov: "Suboticke ulice",
     sadrzaj: "Ovo su suboticke ulice...",
@@ -40,7 +38,10 @@ const kreiranPost = kreirajPost('Subotica kao najlepsi grad u Srbiji', 'Subotick
 console.log(kreiranPost);
 console.log('---');
 const objaviPost = (post) => {
-    return Object.assign(Object.assign({}, post), { statusObjave: 'published' });
+    return {
+        ...post,
+        statusObjave: 'published'
+    };
 };
 console.log(objaviPost(kreiranPost));
 console.log('---');
@@ -58,4 +59,5 @@ const prikaziSumiranjePostova = (postovi) => {
                     , prosecna ocena: ${prosecnaOcena}`);
 };
 prikaziSumiranjePostova([kreiranPost]);
+export {};
 //# sourceMappingURL=solution.js.map

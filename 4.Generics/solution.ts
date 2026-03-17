@@ -36,7 +36,7 @@ console.log(ukloniDuplikate([1, 2, 1, 5, 6, 2, 2, 4, 1, 3, 5, 7, 9]))
 interface ApiOdgovor<T> {
     success: boolean;
     data: T;
-    error?: string | null;
+    statusCode?: string | null;
 }
 
 const odgovorNaBlog: ApiOdgovor<BlogPostWithID> = {
@@ -53,11 +53,11 @@ const odgovorNaBlog: ApiOdgovor<BlogPostWithID> = {
         },
         statusObjave: 'draft'
     },
-    error: '500'
+    statusCode: '500'
 }
 
 const odgovorNaBlogNiz: ApiOdgovor<BlogPostWithID[]> = {
-    success: true,
+    success: false,
     data: [{
         ID: Math.floor(Math.random() * 100),
         naslov: 'Suboticke ulice 1',
@@ -82,13 +82,34 @@ const odgovorNaBlogNiz: ApiOdgovor<BlogPostWithID[]> = {
         },
         statusObjave: 'archived'
     }],
-    error: '500'
+    statusCode: '500'
 }
 
-// function kreitajOdgovor<T>(data: T): ApiOdgovor<T> {
-//     return 
-// }
+const spavaj = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
+async function proveriOdgovor<T>(): Promise<ApiOdgovor<T>> {
+    await spavaj(2000)
+
+    return {
+        ...odgovorNaBlogNiz,
+        success: true,
+        statusCode: '200',
+    } as ApiOdgovor<T>
+}
 
 
-console.log(odgovorNaBlog)
+
+console.log('---')
+
+if (odgovorNaBlog.statusCode === '500') console.log(`
+    Nije moguce pristupiti blogovima, (error code: ${odgovorNaBlog.statusCode})`)
+else if (odgovorNaBlog.statusCode === '404') console.log(`
+    Nije moguce pristupiti blogovima, (error code: ${odgovorNaBlog.statusCode})`)
+else console.log(odgovorNaBlog)
+
+console.log('---')
 console.log(odgovorNaBlogNiz)
+console.log('---')
+const odgovor = await proveriOdgovor()
+console.log(odgovor)
+console.log('Server je pokrenut, blogovi su vidljivi')

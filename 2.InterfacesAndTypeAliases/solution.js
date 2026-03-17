@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const mojPost = {
     naslov: "Suboticke ulice",
     sadrzaj: "ovo su suboticke ulice",
@@ -12,4 +10,5 @@ const mojPost = {
     statusObjave: "published"
 };
 console.log(mojPost);
+export {};
 //# sourceMappingURL=solution.js.map
