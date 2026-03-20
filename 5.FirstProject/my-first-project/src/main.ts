@@ -64,4 +64,13 @@ function renderujPostove(postovi: BlogPost[]): void {
     `;
 }
 
+function filtrirajPostove(postovi: BlogPost[], status: BlogPost['statusObjave']) {
+    postovi.forEach((post: BlogPost) => {
+        if (post.statusObjave === status) {
+            console.log(post);
+        }
+    });
+}
+
+filtrirajPostove(postovi, 'draft')
 renderujPostove(postovi);
