@@ -41,14 +41,6 @@ const postovi: BlogPost[] = [
     }
 ];
 
-// const postoviSaOcenom = postovi.filter(post => post.ocena !== null)
-// const ukupanBrojPostova = postoviSaOcenom.length
-// // const sumaOcena: number = postoviSaOcenom.reduce((suma, post) => {
-// //     return suma + (post.ocena || 0)
-// // }, 0)
-
-// console.log(`${sumaOcena}, ${ukupanBrojPostova}`)
-
 function prikaziPost(post: BlogPost): string {
     const ocena = post.ocena !== null ? `⭐ ${post.ocena}` : "Nije ocenjeno";
 
