@@ -41,13 +41,13 @@ const postovi: BlogPost[] = [
     }
 ];
 
-const postoviSaOcenom = postovi.filter(post => post.ocena= null)
-const ukupanBrojPostova = postoviSaOcenom.length
-const prosecnaOcenaBlogova: number = postoviSaOcenom.reduce((suma, post) => {
-    return suma + (post.ocena || 0)
-}, 0)
+// const postoviSaOcenom = postovi.filter(post => post.ocena !== null)
+// const ukupanBrojPostova = postoviSaOcenom.length
+// // const sumaOcena: number = postoviSaOcenom.reduce((suma, post) => {
+// //     return suma + (post.ocena || 0)
+// // }, 0)
 
-console.log(`${prosecnaOcenaBlogova}, ${ukupanBrojPostova}`)
+// console.log(`${sumaOcena}, ${ukupanBrojPostova}`)
 
 function prikaziPost(post: BlogPost): string {
     const ocena = post.ocena !== null ? `⭐ ${post.ocena}` : "Nije ocenjeno";
@@ -70,13 +70,13 @@ function prikaziPrazanPost(): string {
     `
 }
 
-function renderujPostove(postovi: BlogPost[]): void {
+function renderujPostove(postovi: BlogPost[], ocena: number | string = 'NaN'): string {
     const app = document.querySelector<HTMLDivElement>("#app");
-    if (!app) return;
+    if (!app) return 'Ne postoji div';
 
-    app.innerHTML = `
+    return app.innerHTML = `
         <h1>📝 Blog Post Manager</h1>
-        <h3>Prosecna ocena postova je ${prosecnaOcenaBlogova}</h3>
+        <h2>Prosecna ocena postova je ${ocena}</h2>
         ${postovi.map(prikaziPost).join("")}
     `;
 }
@@ -86,13 +86,18 @@ function filtrirajPostove(postovi: BlogPost[], status: StatusObjave) {
         if (!app) return;
 
         const filtriraniPostovi = postovi.filter(post => post.statusObjave === status)
+        const filtriraniPostoviSaOcenom = filtriraniPostovi.filter(post => post.ocena !== null)
+        const brojFiltriranihPostovaSaOcenom = filtriraniPostoviSaOcenom.length
 
-        console.log(filtriraniPostovi)
-
+        const prosecnaOcena: number = filtriraniPostoviSaOcenom.reduce((suma, post) => {
+            return suma + (post.ocena || 0)
+        }, 0) / brojFiltriranihPostovaSaOcenom
+  
+        
         if (filtriraniPostovi.length === 0) {
             app.innerHTML = prikaziPrazanPost();
         } else {
-            renderujPostove(filtriraniPostovi);
+            renderujPostove(filtriraniPostovi, prosecnaOcena);
         }
 }
 
@@ -101,7 +106,14 @@ const sviBtn = document.querySelector<HTMLButtonElement>('#sviBtn')
 const publishedBtn = document.querySelector<HTMLButtonElement>('#publishedBtn')
 
 sviBtn?.addEventListener('click', () => {
-    renderujPostove(postovi)
+    const postoviSaOcenom = postovi.filter(post => post.ocena !== null)
+    const brojPostovaSaOcenom = postoviSaOcenom.length
+
+    const prosecnaOcena: number = postoviSaOcenom.reduce((suma, post) => {
+            return suma + (post.ocena || 0)
+        }, 0) / brojPostovaSaOcenom
+
+    renderujPostove(postovi, prosecnaOcena)
 })
 
 draftBtn?.addEventListener('click', () => {
