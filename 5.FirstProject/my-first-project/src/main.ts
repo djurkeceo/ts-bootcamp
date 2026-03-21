@@ -54,6 +54,14 @@ function prikaziPost(post: BlogPost): string {
     `;
 }
 
+function prikaziPrazanPost(): string {
+    return `
+        <h1>
+            Ne postoji post sa ovim statusom
+        </h1>
+    `
+}
+
 function renderujPostove(postovi: BlogPost[]): void {
     const app = document.querySelector<HTMLDivElement>("#app");
     if (!app) return;
@@ -64,13 +72,33 @@ function renderujPostove(postovi: BlogPost[]): void {
     `;
 }
 
-function filtrirajPostove(postovi: BlogPost[], status: BlogPost['statusObjave']) {
-    postovi.forEach((post: BlogPost) => {
-        if (post.statusObjave === status) {
-            console.log(post);
+function filtrirajPostove(postovi: BlogPost[], status: StatusObjave) {
+        const app = document.querySelector<HTMLDivElement>("#app");
+        if (!app) return;
+
+        const filtriraniPostovi = postovi.filter(post => post.statusObjave === status)
+
+        console.log(filtriraniPostovi)
+
+        if (filtriraniPostovi.length === 0) {
+            app.innerHTML = prikaziPrazanPost();
+        } else {
+            renderujPostove(filtriraniPostovi);
         }
-    });
 }
 
+const draftBtn = document.querySelector('#draftBtn') as HTMLButtonElement
+const sviBtn = document.querySelector<HTMLButtonElement>('#sviBtn')
+const publishedBtn = document.querySelector<HTMLButtonElement>('#publisedBtn')
+
+sviBtn?.addEventListener('click', () => {
+    renderujPostove(postovi)
+})
+
+draftBtn?.addEventListener('click', () => {
+    const inner = draftBtn.innerText as StatusObjave
+    filtrirajPostove(postovi, inner)
+})
+
 filtrirajPostove(postovi, 'draft')
-renderujPostove(postovi);
+// renderujPostove(postovi);
