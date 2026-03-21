@@ -87,9 +87,9 @@ function filtrirajPostove(postovi: BlogPost[], status: StatusObjave) {
         }
 }
 
-const draftBtn = document.querySelector('#draftBtn') as HTMLButtonElement
+const draftBtn = document.querySelector<HTMLButtonElement>('#draftBtn')
 const sviBtn = document.querySelector<HTMLButtonElement>('#sviBtn')
-const publishedBtn = document.querySelector<HTMLButtonElement>('#publisedBtn')
+const publishedBtn = document.querySelector<HTMLButtonElement>('#publishedBtn')
 
 sviBtn?.addEventListener('click', () => {
     renderujPostove(postovi)
@@ -100,5 +100,7 @@ draftBtn?.addEventListener('click', () => {
     filtrirajPostove(postovi, inner)
 })
 
-filtrirajPostove(postovi, 'draft')
-// renderujPostove(postovi);
+publishedBtn?.addEventListener('click', () => {
+    const inner = publishedBtn.innerText as StatusObjave
+    filtrirajPostove(postovi, inner)
+})
