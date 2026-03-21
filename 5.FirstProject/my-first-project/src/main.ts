@@ -41,6 +41,14 @@ const postovi: BlogPost[] = [
     }
 ];
 
+const postoviSaOcenom = postovi.filter(post => post.ocena= null)
+const ukupanBrojPostova = postoviSaOcenom.length
+const prosecnaOcenaBlogova: number = postoviSaOcenom.reduce((suma, post) => {
+    return suma + (post.ocena || 0)
+}, 0)
+
+console.log(`${prosecnaOcenaBlogova}, ${ukupanBrojPostova}`)
+
 function prikaziPost(post: BlogPost): string {
     const ocena = post.ocena !== null ? `⭐ ${post.ocena}` : "Nije ocenjeno";
 
@@ -68,6 +76,7 @@ function renderujPostove(postovi: BlogPost[]): void {
 
     app.innerHTML = `
         <h1>📝 Blog Post Manager</h1>
+        <h3>Prosecna ocena postova je ${prosecnaOcenaBlogova}</h3>
         ${postovi.map(prikaziPost).join("")}
     `;
 }
@@ -96,11 +105,11 @@ sviBtn?.addEventListener('click', () => {
 })
 
 draftBtn?.addEventListener('click', () => {
-    const inner = draftBtn.innerText as StatusObjave
+    const inner = draftBtn.innerText.toLowerCase() as StatusObjave
     filtrirajPostove(postovi, inner)
 })
 
 publishedBtn?.addEventListener('click', () => {
-    const inner = publishedBtn.innerText as StatusObjave
+    const inner = publishedBtn.innerText.toLowerCase() as StatusObjave
     filtrirajPostove(postovi, inner)
 })
