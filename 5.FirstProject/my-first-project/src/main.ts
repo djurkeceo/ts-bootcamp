@@ -102,7 +102,7 @@ sviBtn?.addEventListener('click', () => {
     const brojPostovaSaOcenom = postoviSaOcenom.length
 
     const prosecnaOcena: number = postoviSaOcenom.reduce((suma, post) => {
-            return suma + (post.ocena || 0)
+            return suma + (post.ocena ?? 0)
         }, 0) / brojPostovaSaOcenom
 
     renderujPostove(postovi, prosecnaOcena)
