@@ -19,6 +19,7 @@ function App() {
     const [naziv, setNaziv] = useState<string>('');
     const [opis, setOpis] = useState<string>('');
     const [prioritet, setPrioritet] = useState<PrioritetZadatka>('nizak');
+    const idPoslednjegZadatka = zadaci[zadaci.length - 1].id
 
   const filtriraniZadaci = zadaci.filter(zadatak => {
     if(filter === 'svi') return true
@@ -56,7 +57,10 @@ function App() {
                 type="text"
                 placeholder='unesi opis zadataka'/>
 
-                <select value={prioritet} name="PrioritetZadatka">
+                <select 
+                value={prioritet}
+                // onChange={e => setPrioritet(e.target.value)} 
+                name="PrioritetZadatka">
                     <option value="nizak">Nizak</option>
                     <option value="srednji">Srednji</option>
                     <option value="visok">Visok</option>
