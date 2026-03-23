@@ -37,11 +37,11 @@ function App() {
                 <p>Trenutni filter: <strong>{filter}</strong></p>
             </div>
 
-            {filtriraniZadaci.map(zadatak => (
+            { filtriraniZadaci.map(zadatak => (
                 <KarticaZadatka key={zadatak.id} {...zadatak} />
-            ))}
+            )) }
             
-            {filtriraniZadaci.length === 0 && <p>Nema zadataka sa ovim statusom.</p>}
+            { filtriraniZadaci.length === 0 && <p>Nema zadataka sa ovim statusom.</p> }
 
             <div>
                 <input 
