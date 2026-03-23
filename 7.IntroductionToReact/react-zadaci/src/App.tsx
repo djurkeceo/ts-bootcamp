@@ -1,12 +1,7 @@
 import { useState } from 'react'
-import { type StatusZadataka, type Zadatak } from './types.ts'
+import { type PrioritetZadatka, type StatusZadataka, type Zadatak } from './types.ts'
 import KarticaZadatka from './components/KarticaZadataka.tsx'
-
-const [zadaci, setZadaci] = useState<Zadatak[]>([
-    { id: 1, naziv: 'ide gas', opis: 'ide gas na maks', prioritet: 'nizak', status: 'todo', datumKreiranja: '3/23/2026' },
-    { id: 2, naziv: 'ide gas 2', opis: 'ide gas na maks 2', prioritet: 'srednji', status: 'u-toku', datumKreiranja: '3/23/2026' },
-    { id: 3, naziv: 'ide gas 3', opis: 'ide gas na maks 3', prioritet: 'visok', status: 'zavrseno', datumKreiranja: '3/23/2026' }
-])
+import { kreirajZadatak } from './components/FormaZadatka.tsx'
 
 // const zadaci: Zadatak[] = [
 //   { id: 1, naziv: 'ide gas', opis: 'ide gas na maks', prioritet: 'nizak', status: 'todo', datumKreiranja: '3/23/2026' },
@@ -15,7 +10,15 @@ const [zadaci, setZadaci] = useState<Zadatak[]>([
 // ]
 
 function App() {
-  const [filter, setFilter] = useState<StatusZadataka | 'svi'>('svi')
+    const [filter, setFilter] = useState<StatusZadataka | 'svi'>('svi')
+    const [zadaci, setZadaci] = useState<Zadatak[]>([
+        { id: 1, naziv: 'ide gas', opis: 'ide gas na maks', prioritet: 'nizak', status: 'todo', datumKreiranja: '3/23/2026' },
+        { id: 2, naziv: 'ide gas 2', opis: 'ide gas na maks 2', prioritet: 'srednji', status: 'u-toku', datumKreiranja: '3/23/2026' },
+        { id: 3, naziv: 'ide gas 3', opis: 'ide gas na maks 3', prioritet: 'visok', status: 'zavrseno', datumKreiranja: '3/23/2026' }
+    ])
+    const [naziv, setNaziv] = useState<string>('');
+    const [opis, setOpis] = useState<string>('');
+    const [prioritet, setPrioritet] = useState<PrioritetZadatka>('nizak');
 
   const filtriraniZadaci = zadaci.filter(zadatak => {
     if(filter === 'svi') return true
@@ -39,6 +42,28 @@ function App() {
             ))}
             
             {filtriraniZadaci.length === 0 && <p>Nema zadataka sa ovim statusom.</p>}
+
+            <div>
+                <input 
+                value={naziv} 
+                onChange={e => setNaziv(e.target.value)}
+                type="text" 
+                placeholder='unesi naziv zadatka'/>
+
+                <input 
+                value={opis}
+                onChange={e => setOpis(e.target.value)}
+                type="text"
+                placeholder='unesi opis zadataka'/>
+
+                <select value={prioritet} name="PrioritetZadatka">
+                    <option value="nizak">Nizak</option>
+                    <option value="srednji">Srednji</option>
+                    <option value="visok">Visok</option>
+                </select>
+
+                <button onClick={() => setZadaci([...zadaci, kreirajZadatak(naziv, opis, prioritet)])} />
+            </div>
         </div>
     )
 }

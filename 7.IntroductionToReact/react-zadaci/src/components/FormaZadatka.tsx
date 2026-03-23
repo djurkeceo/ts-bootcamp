@@ -3,7 +3,7 @@ import type { PrioritetZadatka, Zadatak } from "../types"
 const datum = new Date()
 const danasnjiDatum = datum.toLocaleDateString()
 
-function kreirajZadatak (naziv: string, opis: string, prioritet: PrioritetZadatka): Zadatak {
+export function kreirajZadatak (naziv: string, opis: string, prioritet: PrioritetZadatka): Zadatak {
     return {
         id: Math.floor(Math.random()*1000),
         naziv: naziv,
