@@ -1,9 +1,9 @@
-import type { PrioritetZadatka, Zadatak } from "../types"
+import type { PrioritetZadatka, Zadatak } from "./types.ts"
 
 const datum = new Date()
 const danasnjiDatum = datum.toLocaleDateString()
 
-export function kreirajZadatak (naziv: string, opis: string, prioritet: PrioritetZadatka): Zadatak {
+function kreirajZadatak (naziv: string, opis: string, prioritet: PrioritetZadatka): Zadatak {
     return {
         id: Math.floor(Math.random()*1000),
         naziv: naziv,
@@ -13,3 +13,5 @@ export function kreirajZadatak (naziv: string, opis: string, prioritet: Priorite
         datumKreiranja: danasnjiDatum
     }
 }
+
+export default kreirajZadatak

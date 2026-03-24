@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { type PrioritetZadatka, type StatusZadataka, type Zadatak } from './types.ts'
 import KarticaZadatka from './components/KarticaZadataka.tsx'
-import { kreirajZadatak } from './components/FormaZadatka.tsx'
+import kreirajZadatak from './utils.ts'
 import './App.css'
 
 // const zadaci: Zadatak[] = [
