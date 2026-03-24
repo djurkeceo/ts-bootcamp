@@ -26,7 +26,7 @@ function App() {
     }
 
     function promeniStatus(id: number, noviStatus: StatusZadataka): void {
-        setZadaci(zadaci.filter(zadatak => 
+        setZadaci(zadaci.map(zadatak => 
             zadatak.id === id
             ? {...zadatak, status: noviStatus}
             : zadatak
