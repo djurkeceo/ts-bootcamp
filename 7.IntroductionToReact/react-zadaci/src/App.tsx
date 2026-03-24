@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { type PrioritetZadatka, type StatusZadataka, type Zadatak } from './types.ts'
 import KarticaZadatka from './components/KarticaZadataka.tsx'
 import { kreirajZadatak } from './components/FormaZadatka.tsx'
+import './App.css'
 
 // const zadaci: Zadatak[] = [
 //   { id: 1, naziv: 'ide gas', opis: 'ide gas na maks', prioritet: 'nizak', status: 'todo', datumKreiranja: '3/23/2026' },
@@ -44,7 +45,7 @@ function App() {
             
             { filtriraniZadaci.length === 0 && <p>Nema zadataka sa ovim statusom.</p> }
 
-            <div>
+            <div className="inputDiv">
                 <input 
                 value={naziv} 
                 onChange={e => setNaziv(e.target.value)}
@@ -66,7 +67,7 @@ function App() {
                     <option value="visok">Visok</option>
                 </select>
 
-                <button onClick={() => setZadaci([...zadaci, kreirajZadatak(naziv, opis, prioritet)])} />
+                <button id="sumbitBtn" onClick={() => setZadaci([...zadaci, kreirajZadatak(naziv, opis, prioritet)])} >Dodaj zadatak</button>
             </div>
         </div>
     )
