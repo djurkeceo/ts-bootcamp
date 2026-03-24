@@ -26,6 +26,10 @@ function App() {
     return zadatak.status === filter
   })
 
+  function obrisiZadatak (id: number): void {
+    setZadaci(zadaci.filter(zadatak => zadatak.id !== id))
+}
+
     return (  
       <div>
             <h1>Moji Zadaci</h1>
@@ -39,7 +43,7 @@ function App() {
             </div>
 
             { filtriraniZadaci.map(zadatak => (
-                <KarticaZadatka key={zadatak.id} {...zadatak} />
+                <KarticaZadatka key={zadatak.id} {...zadatak} onObrisi={obrisiZadatak}/>
             )) }
             
             { filtriraniZadaci.length === 0 && <p>Nema zadataka sa ovim statusom.</p> }
