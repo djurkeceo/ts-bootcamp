@@ -21,14 +21,22 @@ function App() {
     const [opis, setOpis] = useState<string>('');
     const [prioritet, setPrioritet] = useState<PrioritetZadatka>('nizak');
 
-  const filtriraniZadaci = zadaci.filter(zadatak => {
-    if(filter === 'svi') return true
-    return zadatak.status === filter
-  })
+    const filtriraniZadaci = zadaci.filter(zadatak => {
+        if(filter === 'svi') return true
+        return zadatak.status === filter
+    })
 
-  function obrisiZadatak (id: number): void {
-    setZadaci(zadaci.filter(zadatak => zadatak.id !== id))
-}
+    function obrisiZadatak (id: number): void {
+        setZadaci(zadaci.filter(zadatak => zadatak.id !== id))
+    }
+
+    function promeniStatus(id: number, noviStatus: StatusZadataka): void {
+        setZadaci(zadaci.filter(zadatak => 
+            zadatak.id === id
+            ? {...zadatak, status: noviStatus}
+            : zadatak
+        ))
+    }
 
     return (  
       <div>
@@ -43,7 +51,12 @@ function App() {
             </div>
 
             { filtriraniZadaci.map(zadatak => (
-                <KarticaZadatka key={zadatak.id} {...zadatak} onObrisi={obrisiZadatak}/>
+                <KarticaZadatka 
+                    key={zadatak.id}    
+                    {...zadatak}    
+                    onObrisi={obrisiZadatak}    
+                    onPromeniStatus={promeniStatus} 
+                />
             )) }
             
             { filtriraniZadaci.length === 0 && <p>Nema zadataka sa ovim statusom.</p> }
