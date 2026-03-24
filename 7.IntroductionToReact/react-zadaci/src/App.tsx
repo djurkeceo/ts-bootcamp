@@ -59,7 +59,7 @@ function App() {
 
                 <select 
                 value={prioritet}
-                // onChange={e => setPrioritet(e.target.value)} 
+                onChange={e => setPrioritet(e.target.value as PrioritetZadatka)} 
                 name="PrioritetZadatka">
                     <option value="nizak">Nizak</option>
                     <option value="srednji">Srednji</option>
