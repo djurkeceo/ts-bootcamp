@@ -4,11 +4,6 @@ import KarticaZadatka from './components/KarticaZadataka.tsx'
 import kreirajZadatak from './utils.ts'
 import './App.css'
 
-// const zadaci: Zadatak[] = [
-//   { id: 1, naziv: 'ide gas', opis: 'ide gas na maks', prioritet: 'nizak', status: 'todo', datumKreiranja: '3/23/2026' },
-//   { id: 2, naziv: 'ide gas 2', opis: 'ide gas na maks 2', prioritet: 'srednji', status: 'u-toku', datumKreiranja: '3/23/2026' },
-//   { id: 3, naziv: 'ide gas 3', opis: 'ide gas na maks 3', prioritet: 'visok', status: 'zavrseno', datumKreiranja: '3/23/2026' }
-// ]
 
 function App() {
     const [filter, setFilter] = useState<StatusZadataka | 'svi'>('svi')
