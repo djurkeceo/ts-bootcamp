@@ -20,7 +20,6 @@ function App() {
     const [naziv, setNaziv] = useState<string>('');
     const [opis, setOpis] = useState<string>('');
     const [prioritet, setPrioritet] = useState<PrioritetZadatka>('nizak');
-    const idPoslednjegZadatka = zadaci[zadaci.length - 1].id
 
   const filtriraniZadaci = zadaci.filter(zadatak => {
     if(filter === 'svi') return true
@@ -67,7 +66,14 @@ function App() {
                     <option value="visok">Visok</option>
                 </select>
 
-                <button id="sumbitBtn" onClick={() => setZadaci([...zadaci, kreirajZadatak(naziv, opis, prioritet)])} >Dodaj zadatak</button>
+                <button 
+                id="sumbitBtn" 
+                onClick={() => {
+                    setZadaci([...zadaci, kreirajZadatak(naziv, opis, prioritet)])
+                    setNaziv('')
+                    setOpis('')
+                    setPrioritet('nizak')
+                }}>Dodaj zadatak</button>
             </div>
         </div>
     )
