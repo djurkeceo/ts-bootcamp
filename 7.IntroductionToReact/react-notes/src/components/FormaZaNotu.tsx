@@ -9,7 +9,7 @@ function FormaZaNotu ({onKreiraj}: notesProps) {
     
     const [naslov, setNaslov] = useState<string>('');
     const [sadrzaj, setSadrzaj] = useState<string>('');
-    const [boja, setBoja] = useState<Boje>('none');
+    const [boja, setBoja] = useState<Boje>('red');
 
     const kreirajNotes = () => {
         const noviNotes: Notes = {
