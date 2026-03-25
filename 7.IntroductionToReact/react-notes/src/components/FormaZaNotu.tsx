@@ -24,7 +24,7 @@ function FormaZaNotu ({onKreiraj}: notesProps) {
 
         setNaslov('')
         setSadrzaj('')
-        setBoja('none')
+        setBoja('red')
     }
 
     return (
@@ -49,7 +49,9 @@ function FormaZaNotu ({onKreiraj}: notesProps) {
                 <option value="red">crvena</option>
                 <option value="green">zelena</option>
                 <option value="blue">plava</option>
-                <option value="yellow">zuta</option>
+                <option value="orange">narandzasta</option>
+                <option value="purple">ljubicasta</option>
+                <option value="indigo">indigo</option>
             </select>
 
             <button onClick={kreirajNotes}>Kreiraj</button>
