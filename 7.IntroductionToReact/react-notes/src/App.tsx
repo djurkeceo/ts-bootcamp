@@ -19,7 +19,7 @@ function App () {
   }
 
    const obrisiNotes = (id: number): void => {
-        note.filter(nota => nota.id !== id)
+        setNote(note.filter(nota => nota.id !== id))
     }
 
   return(
