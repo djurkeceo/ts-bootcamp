@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import KarticaNota from "./components/KarticaNota.tsx";
 import FormaZaNotu from "./components/FormaZaNotu.tsx"
 import { type Notes } from "./types.ts";
@@ -14,9 +14,13 @@ function App () {
     { id: 4, naslov: 'Notes 4', sadrzaj: 'Ovo je sadrzaj notesa 4...', boja: 'orange', datumKreiranja: danasnjiDatum }
   ]);
 
-const kreirajNotes = (noviNotes: Notes) => {
-  setNote([...note, noviNotes])
-}
+  const kreirajNotes = (noviNotes: Notes) => {
+    setNote([...note, noviNotes])
+  }
+
+   const obrisiNotes = (id: number): void => {
+        note.filter(nota => nota.id !== id)
+    }
 
   return(
   <>
@@ -34,6 +38,7 @@ const kreirajNotes = (noviNotes: Notes) => {
         <KarticaNota
           key={(pojedinacnaNota.id)}
           {...pojedinacnaNota}
+          onObrisi={obrisiNotes}
         />
       )}
     </div>
