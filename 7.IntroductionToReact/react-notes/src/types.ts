@@ -1,4 +1,4 @@
-type Boje = 'red' | 'green' | 'blue' | 'orange'
+export type Boje = 'none' | 'red' | 'green' | 'blue' | 'orange'
 
 export interface Notes {
     readonly id: number;

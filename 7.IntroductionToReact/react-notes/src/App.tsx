@@ -14,11 +14,15 @@ function App () {
     { id: 4, naslov: 'Notes 4', sadrzaj: 'Ovo je sadrzaj notesa 4...', boja: 'orange', datumKreiranja: danasnjiDatum }
   ]);
 
+const kreirajNotes = (noviNotes: Notes) => {
+  setNote([...note, noviNotes])
+}
+
   return(
   <>
     <div>
-      <h1>Moji Notesi</h1>
-      <h2>Pretrazi Notes</h2>
+      <h1>Moji notesi</h1>
+      <h2>Pretrazi notes</h2>
       <span>
         <input type="text"/>
         <button>Pretrazi</button>
@@ -32,6 +36,11 @@ function App () {
           {...pojedinacnaNota}
         />
       )}
+    </div>
+    
+    <div style={{marginTop: 20}}>
+      <h2>Kreiraj novi notes</h2>
+      <FormaZaNotu onKreiraj={kreirajNotes}/>
     </div>
   </>
   )
