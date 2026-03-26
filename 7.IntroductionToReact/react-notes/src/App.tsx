@@ -14,13 +14,19 @@ function App () {
     { id: 4, naslov: 'Notes 4', sadrzaj: 'Ovo je sadrzaj notesa 4...', boja: 'orange', datumKreiranja: danasnjiDatum }
   ]);
 
+  const [pretraga, setPretraga] = useState<string>('')
+
   const kreirajNotes = (noviNotes: Notes) => {
     setNote([...note, noviNotes])
   }
 
-   const obrisiNotes = (id: number): void => {
-        setNote(note.filter(nota => nota.id !== id))
-    }
+  const obrisiNotes = (id: number): void => {
+    setNote(note.filter(nota => nota.id !== id))
+  }
+
+  const filtrirane = note.filter(nota => 
+     nota.naslov.toLowerCase().includes(pretraga.toLowerCase())
+  )
 
   return(
   <>
@@ -28,19 +34,23 @@ function App () {
       <h1>Moji notesi</h1>
       <h2>Pretrazi notes</h2>
       <span>
-        <input type="text"/>
-        <button>Pretrazi</button>
+        <input 
+        type="text"
+        value={pretraga}
+        onChange={e => setPretraga(e.target.value)}
+        />
       </span>
     </div>
 
     <div>
-      {note.map((pojedinacnaNota: Notes) =>
+      {filtrirane.map((pojedinacnaNota: Notes) =>
         <KarticaNota
           key={(pojedinacnaNota.id)}
           {...pojedinacnaNota}
           onObrisi={obrisiNotes}
         />
       )}
+      {filtrirane.length === 0 && <p style={{marginTop: 20}}>Nema notesa koji trazite</p>}
     </div>
     
     <div style={{marginTop: 20}}>
