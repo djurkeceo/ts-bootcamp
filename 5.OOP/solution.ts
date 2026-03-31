@@ -1,16 +1,33 @@
-class Automobil {
-    private marka: string
-    private godiste: number
+class Vozilo {
+    protected vrstaVozila: string
+    protected brojSedista: number
 
-    constructor (marka: string, godiste: number) {
-        this.marka = marka
-        this.godiste = godiste
+    constructor (vrstaVozila: string, brojSedista: number) {
+        this.vrstaVozila = vrstaVozila
+        this.brojSedista = brojSedista
+    }
+    
+    prikaziInfo (): string {
+        return `Vrsta vozila: ${this.vrstaVozila}, Broj sedista: ${this.brojSedista}`
+    }
+}  
+
+class Automobil extends Vozilo {
+    private markaAutomobila: string
+    private godisteAutomobila: number
+
+    constructor (markaAutomobila: string, godisteAutomobila: number, brojSedista: number) {
+        super('Automobil', brojSedista)
+        this.markaAutomobila = markaAutomobila
+        this.godisteAutomobila = godisteAutomobila
     }
 
-    ispisi (): string {
-        return `imam automobil marke ${this.marka}, godiste ${this.godiste}`
+    prikaziInfo (): string {
+        return `${super.prikaziInfo()}, Marka automobila: ${this.markaAutomobila}, Godiste automobila: ${this.godisteAutomobila}`
     }
-}   
+}
 
-const auto1 = new Automobil ('bmw', 2015) 
-console.log(auto1.ispisi())
+const vozilo1 = new Vozilo ('Kamion', 3)
+console.log(vozilo1.prikaziInfo())
+const automobil1 = new Automobil ('Audi', 2015, 5)
+console.log(automobil1.prikaziInfo())
