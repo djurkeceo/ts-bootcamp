@@ -1,42 +1,66 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var Vozilo = /** @class */ (function () {
-    function Vozilo(vrstaVozila, brojSedista) {
-        this.vrstaVozila = vrstaVozila;
-        this.brojSedista = brojSedista;
+// class Vozilo {
+//     protected vrstaVozila: string
+//     protected brojSedista: number
+//     constructor (vrstaVozila: string, brojSedista: number) {
+//         this.vrstaVozila = vrstaVozila
+//         this.brojSedista = brojSedista
+//     }
+//     prikaziInfo (): string {
+//         return `Vrsta vozila: ${this.vrstaVozila}, Broj sedista: ${this.brojSedista}`
+//     }
+// }  
+// class Automobil extends Vozilo {
+//     private markaAutomobila: string
+//     private godisteAutomobila: number
+//     constructor (markaAutomobila: string, godisteAutomobila: number, brojSedista: number) {
+//         super('Automobil', brojSedista)
+//         this.markaAutomobila = markaAutomobila
+//         this.godisteAutomobila = godisteAutomobila
+//     }
+//     prikaziInfo (): string {
+//         return `${super.prikaziInfo()}, Marka automobila: ${this.markaAutomobila}, Godiste automobila: ${this.godisteAutomobila}`
+//     }
+// }
+// const vozilo1 = new Vozilo ('Kamion', 3)
+// console.log(vozilo1.prikaziInfo())
+// const automobil1 = new Automobil ('Audi', 2015, 5)
+// console.log(automobil1.prikaziInfo())
+var Igrac = /** @class */ (function () {
+    function Igrac(ime, zdravlje) {
+        if (zdravlje === void 0) { zdravlje = 100; }
+        this.ime = ime;
+        this.zdravlje = Math.min(zdravlje, 100);
+        this.nivo = 1;
     }
-    Vozilo.prototype.prikaziInfo = function () {
-        return "Vrsta vozila: ".concat(this.vrstaVozila, ", Broj sedista: ").concat(this.brojSedista);
+    Igrac.prototype.napadni = function (protivnik) {
+        var steta = Math.floor(Math.random() * 11) + 10;
+        protivnik.primiStetu(steta);
     };
-    return Vozilo;
+    Igrac.prototype.primiStetu = function (steta) {
+        this.zdravlje = Math.max(0, this.zdravlje - steta);
+    };
+    Igrac.prototype.getZdravlje = function () {
+        return this.zdravlje;
+    };
+    Igrac.prototype.getNivo = function () {
+        return this.nivo;
+    };
+    Igrac.prototype.jeZiv = function () {
+        return this.zdravlje > 0 ? true : false;
+    };
+    Igrac.prototype.levelUp = function () {
+        this.nivo++;
+    };
+    return Igrac;
 }());
-var Automobil = /** @class */ (function (_super) {
-    __extends(Automobil, _super);
-    function Automobil(markaAutomobila, godisteAutomobila, brojSedista) {
-        var _this = _super.call(this, 'Automobil', brojSedista) || this;
-        _this.markaAutomobila = markaAutomobila;
-        _this.godisteAutomobila = godisteAutomobila;
-        return _this;
-    }
-    Automobil.prototype.prikaziInfo = function () {
-        return "".concat(_super.prototype.prikaziInfo.call(this), ", Marka automobila: ").concat(this.markaAutomobila, ", Godiste automobila: ").concat(this.godisteAutomobila);
-    };
-    return Automobil;
-}(Vozilo));
-var vozilo1 = new Vozilo('Kamion', 3);
-console.log(vozilo1.prikaziInfo());
-var automobil1 = new Automobil('Audi', 2015, 5);
-console.log(automobil1.prikaziInfo());
+var igrac1 = new Igrac('djurke', 100);
+var igrac2 = new Igrac('maribor', 100);
+while (igrac1.jeZiv() && igrac2.jeZiv()) {
+    igrac1.napadni(igrac2);
+    if (!igrac2.jeZiv())
+        break;
+    igrac2.napadni(igrac1);
+}
+var pobednik = igrac1.jeZiv() ? igrac1 : igrac2;
+pobednik.levelUp();
+console.log("".concat(pobednik.ime, " je pobednik! Nivo: ").concat(pobednik.getNivo()));
