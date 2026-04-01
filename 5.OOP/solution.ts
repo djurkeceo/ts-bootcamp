@@ -35,7 +35,7 @@
 
 class Igrac {
     public ime: string
-    private zdravlje: number
+    protected zdravlje: number
     private nivo: number
 
     constructor (ime: string, zdravlje: number = 100) {
@@ -67,6 +67,36 @@ class Igrac {
 
     levelUp (): void {
         this.nivo++
+    }
+}
+
+class Ratnik extends Igrac {
+    private oklop: number
+
+    constructor (ime: string, oklop: number) {
+        super (ime)
+        this.oklop = oklop
+    }
+
+    override primiStetu(steta: number): void {
+        while (this.oklop > 0) {
+            this.oklop = Math.max(0, this.oklop - steta)
+        }
+        this.zdravlje = Math.max(0, this.zdravlje - steta)
+    }
+}
+
+class Mag extends Igrac {
+    private mana
+
+    constructor (ime: string, mana: number) {
+        super (ime)
+        this.mana = 100
+    }
+
+    magijaNapad (protivnik: Igrac) {
+        const steta = Math.floor(Math.random() * 21) + 30
+        protivnik.primiStetu(steta)
     }
 }
 
