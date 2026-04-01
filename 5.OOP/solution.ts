@@ -95,8 +95,12 @@ class Mag extends Igrac {
     }
 
     magijaNapad (protivnik: Igrac) {
-        const steta = Math.floor(Math.random() * 21) + 30
-        protivnik.primiStetu(steta)
+        while (this.mana > 0) {
+            const steta = Math.floor(Math.random() * 21) + 30
+            protivnik.primiStetu(steta)
+        }
+        const steta = Math.floor(Math.random() * 11) + 10
+        protivnik.primiStetu(steta) 
     }
 }
 
