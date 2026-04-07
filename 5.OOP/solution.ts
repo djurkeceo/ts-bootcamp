@@ -79,40 +79,60 @@ class Ratnik extends Igrac {
     }
 
     override primiStetu(steta: number): void {
-        while (this.oklop > 0) {
+        if (this.oklop > 0) {
+            const preostalaSteta = Math.max(0, steta - this.oklop)
             this.oklop = Math.max(0, this.oklop - steta)
+            this.zdravlje = Math.max(0, this.zdravlje - preostalaSteta)
+        } else {
+            this.zdravlje = Math.max(0, this.zdravlje - steta)
         }
-        this.zdravlje = Math.max(0, this.zdravlje - steta)
+ 
     }
 }
 
 class Mag extends Igrac {
-    private mana
+    private mana: number
 
     constructor (ime: string, mana: number) {
         super (ime)
         this.mana = 100
     }
 
-    magijaNapad (protivnik: Igrac) {
-        while (this.mana > 0) {
+    magijaNapad (protivnik: Igrac): void {
+        if (this.mana >= 20) {
             const steta = Math.floor(Math.random() * 21) + 30
             protivnik.primiStetu(steta)
+            this.mana -= 20  
+        } else {
+            const steta = Math.floor(Math.random() * 11) + 10
+            protivnik.primiStetu(steta)
         }
-        const steta = Math.floor(Math.random() * 11) + 10
-        protivnik.primiStetu(steta) 
+ 
+    }
+}
+
+class Lekar extends Igrac {
+    lecenje (): void {
+        this.zdravlje = Math.min(this.zdravlje + 20, 100)
     }
 }
 
 const igrac1 = new Igrac('djurke', 100)
-const igrac2 = new Igrac('maribor', 100)
+const igrac2 = new Mag('maribor', 100)
+const igrac3 = new Lekar('zalfija', 100)
+const sviIgraci = [igrac1, igrac2, igrac3]
 
-while (igrac1.jeZiv() && igrac2.jeZiv()) {
-    igrac1.napadni(igrac2)
-    if (!igrac2.jeZiv()) break
-    igrac2.napadni(igrac1)
+while (igrac1.jeZiv() && igrac2.jeZiv() && igrac3.jeZiv()) {
+    igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    if (!igrac1.jeZiv()) break 
+    else igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    if (!igrac2.jeZiv()) break 
+    else igrac2.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    if (!igrac3.jeZiv()) break 
+    else igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
 }
 
-const pobednik = igrac1.jeZiv() ? igrac1 : igrac2
+const pobednik = sviIgraci.find(igrac => igrac.jeZiv()) as Igrac
 pobednik.levelUp()
 console.log(`${pobednik.ime} je pobednik! Nivo: ${pobednik.getNivo()}`)

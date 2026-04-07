@@ -1,3 +1,4 @@
+"use strict";
 // class Vozilo {
 //     protected vrstaVozila: string
 //     protected brojSedista: number
@@ -25,42 +26,96 @@
 // console.log(vozilo1.prikaziInfo())
 // const automobil1 = new Automobil ('Audi', 2015, 5)
 // console.log(automobil1.prikaziInfo())
-var Igrac = /** @class */ (function () {
-    function Igrac(ime, zdravlje) {
-        if (zdravlje === void 0) { zdravlje = 100; }
+class Igrac {
+    ime;
+    zdravlje;
+    nivo;
+    constructor(ime, zdravlje = 100) {
         this.ime = ime;
         this.zdravlje = Math.min(zdravlje, 100);
         this.nivo = 1;
     }
-    Igrac.prototype.napadni = function (protivnik) {
-        var steta = Math.floor(Math.random() * 11) + 10;
+    napadni(protivnik) {
+        const steta = Math.floor(Math.random() * 11) + 10;
         protivnik.primiStetu(steta);
-    };
-    Igrac.prototype.primiStetu = function (steta) {
+    }
+    primiStetu(steta) {
         this.zdravlje = Math.max(0, this.zdravlje - steta);
-    };
-    Igrac.prototype.getZdravlje = function () {
+    }
+    getZdravlje() {
         return this.zdravlje;
-    };
-    Igrac.prototype.getNivo = function () {
+    }
+    getNivo() {
         return this.nivo;
-    };
-    Igrac.prototype.jeZiv = function () {
-        return this.zdravlje > 0 ? true : false;
-    };
-    Igrac.prototype.levelUp = function () {
+    }
+    jeZiv() {
+        return this.zdravlje > 0;
+    }
+    levelUp() {
         this.nivo++;
-    };
-    return Igrac;
-}());
-var igrac1 = new Igrac('djurke', 100);
-var igrac2 = new Igrac('maribor', 100);
-while (igrac1.jeZiv() && igrac2.jeZiv()) {
-    igrac1.napadni(igrac2);
+    }
+}
+class Ratnik extends Igrac {
+    oklop;
+    constructor(ime, oklop) {
+        super(ime);
+        this.oklop = oklop;
+    }
+    primiStetu(steta) {
+        if (this.oklop > 0) {
+            const preostalaSteta = Math.max(0, steta - this.oklop);
+            this.oklop = Math.max(0, this.oklop - steta);
+            this.zdravlje = Math.max(0, this.zdravlje - preostalaSteta);
+        }
+        else {
+            this.zdravlje = Math.max(0, this.zdravlje - steta);
+        }
+    }
+}
+class Mag extends Igrac {
+    mana;
+    constructor(ime, mana) {
+        super(ime);
+        this.mana = 100;
+    }
+    magijaNapad(protivnik) {
+        if (this.mana >= 20) {
+            const steta = Math.floor(Math.random() * 21) + 30;
+            protivnik.primiStetu(steta);
+            this.mana -= 20;
+        }
+        else {
+            const steta = Math.floor(Math.random() * 11) + 10;
+            protivnik.primiStetu(steta);
+        }
+    }
+}
+class Lekar extends Igrac {
+    lecenje() {
+        this.zdravlje = Math.min(this.zdravlje + 20, 100);
+    }
+}
+const igrac1 = new Igrac('djurke', 100);
+const igrac2 = new Mag('maribor', 100);
+const igrac3 = new Lekar('zalfija', 100);
+const sviIgraci = [igrac1, igrac2, igrac3];
+while (igrac1.jeZiv() && igrac2.jeZiv() && igrac3.jeZiv()) {
+    igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
+    igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
+    if (!igrac1.jeZiv())
+        break;
+    else
+        igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
     if (!igrac2.jeZiv())
         break;
-    igrac2.napadni(igrac1);
+    else
+        igrac2.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
+    if (!igrac3.jeZiv())
+        break;
+    else
+        igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
 }
-var pobednik = igrac1.jeZiv() ? igrac1 : igrac2;
+const pobednik = sviIgraci.find(igrac => igrac.jeZiv());
 pobednik.levelUp();
-console.log("".concat(pobednik.ime, " je pobednik! Nivo: ").concat(pobednik.getNivo()));
+console.log(`${pobednik.ime} je pobednik! Nivo: ${pobednik.getNivo()}`);
+//# sourceMappingURL=solution.js.map

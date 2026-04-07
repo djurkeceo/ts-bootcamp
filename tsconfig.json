@@ -7,8 +7,8 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "target": "es2024",
     // For nodejs:
     "lib": ["ES2024", "DOM", "ESNext"],
@@ -35,10 +35,10 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
+    "verbatimModuleSyntax": false,
+    "isolatedModules": false,
     "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
+    "moduleDetection": "auto",
     "skipLibCheck": true,
   },
 
@@ -46,7 +46,8 @@
     "1.TheBuildingBlocks/**/*",
     "2.InterfacesAndTypeAliases/**/*",
     "3.FunctionsAndEnums/**/*",
-    "4.Generics/**/*"
+    "4.Generics/**/*",
+    "5.OOP/**/*"
   ],
   
   "exclude": ["node_modules"]

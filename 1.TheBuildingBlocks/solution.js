@@ -1,3 +1,4 @@
+"use strict";
 let naslov;
 let broj_pregleda;
 let objavljen;
@@ -8,7 +9,6 @@ let ocena2;
 const status1 = "published";
 let RGB = [255, 0, 150];
 console.log(RGB);
-export {};
 /**
  * bonus izazov
  * ------------

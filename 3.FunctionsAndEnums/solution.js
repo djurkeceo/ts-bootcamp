@@ -1,3 +1,4 @@
+"use strict";
 const mojPost = {
     naslov: "Suboticke ulice",
     sadrzaj: "Ovo su suboticke ulice...",
@@ -59,5 +60,4 @@ const prikaziSumiranjePostova = (postovi) => {
                     , prosecna ocena: ${prosecnaOcena}`);
 };
 prikaziSumiranjePostova([kreiranPost]);
-export {};
 //# sourceMappingURL=solution.js.map
