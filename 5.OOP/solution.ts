@@ -93,7 +93,7 @@ class Ratnik extends Igrac {
 class Mag extends Igrac {
     private mana: number
 
-    constructor (ime: string, mana: number) {
+    constructor (ime: string, mana: number = 100) {
         super (ime)
         this.mana = 100
     }
@@ -124,7 +124,13 @@ const sviIgraci = [igrac1, igrac2, igrac3]
 
 while (igrac1.jeZiv() && igrac2.jeZiv() && igrac3.jeZiv()) {
     igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    igrac2.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
     igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    if (igrac3.getZdravlje() < 50) {
+        igrac3.lecenje()
+    } else {
+        igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    }
     if (!igrac1.jeZiv()) break 
     else igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
     if (!igrac2.jeZiv()) break 
