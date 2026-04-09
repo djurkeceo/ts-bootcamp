@@ -122,21 +122,23 @@ const igrac2 = new Mag('maribor', 100)
 const igrac3 = new Lekar('zalfija', 100)
 const sviIgraci = [igrac1, igrac2, igrac3]
 
+const randomIgrac = (): Igrac => {
+    return sviIgraci[Math.floor(Math.random() * (sviIgraci.length) - 1)] as Igrac
+} 
+
 while (igrac1.jeZiv() && igrac2.jeZiv() && igrac3.jeZiv()) {
-    igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
-    igrac2.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
-    igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    
     if (igrac3.getZdravlje() < 50) {
         igrac3.lecenje()
     } else {
-        igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+        igrac3.napadni(randomIgrac())
     }
     if (!igrac1.jeZiv()) break 
-    else igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    else igrac1.napadni(randomIgrac())
     if (!igrac2.jeZiv()) break 
-    else igrac2.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    else igrac2.napadni(randomIgrac())
     if (!igrac3.jeZiv()) break 
-    else igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)] as Igrac)
+    else igrac3.napadni(randomIgrac())
 }
 
 const pobednik = sviIgraci.find(igrac => igrac.jeZiv()) as Igrac

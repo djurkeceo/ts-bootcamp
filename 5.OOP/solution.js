@@ -74,7 +74,7 @@ class Ratnik extends Igrac {
 }
 class Mag extends Igrac {
     mana;
-    constructor(ime, mana) {
+    constructor(ime, mana = 100) {
         super(ime);
         this.mana = 100;
     }
@@ -99,21 +99,28 @@ const igrac1 = new Igrac('djurke', 100);
 const igrac2 = new Mag('maribor', 100);
 const igrac3 = new Lekar('zalfija', 100);
 const sviIgraci = [igrac1, igrac2, igrac3];
+const randomIgrac = () => {
+    return sviIgraci[Math.floor(Math.random() * sviIgraci.length)];
+};
 while (igrac1.jeZiv() && igrac2.jeZiv() && igrac3.jeZiv()) {
-    igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
-    igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
+    if (igrac3.getZdravlje() < 50) {
+        igrac3.lecenje();
+    }
+    else {
+        igrac3.napadni(randomIgrac());
+    }
     if (!igrac1.jeZiv())
         break;
     else
-        igrac1.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
+        igrac1.napadni(randomIgrac());
     if (!igrac2.jeZiv())
         break;
     else
-        igrac2.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
+        igrac2.napadni(randomIgrac());
     if (!igrac3.jeZiv())
         break;
     else
-        igrac3.napadni(sviIgraci[Math.floor(Math.random() * sviIgraci.length)]);
+        igrac3.napadni(randomIgrac());
 }
 const pobednik = sviIgraci.find(igrac => igrac.jeZiv());
 pobednik.levelUp();

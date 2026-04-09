@@ -17,7 +17,7 @@ declare class Ratnik extends Igrac {
 }
 declare class Mag extends Igrac {
     private mana;
-    constructor(ime: string, mana: number);
+    constructor(ime: string, mana?: number);
     magijaNapad(protivnik: Igrac): void;
 }
 declare class Lekar extends Igrac {
@@ -27,5 +27,6 @@ declare const igrac1: Igrac;
 declare const igrac2: Mag;
 declare const igrac3: Lekar;
 declare const sviIgraci: Igrac[];
+declare const randomIgrac: () => Igrac;
 declare const pobednik: Igrac;
 //# sourceMappingURL=solution.d.ts.map
